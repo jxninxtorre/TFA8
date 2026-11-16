@@ -25,7 +25,18 @@
                     <td>{{ $customer->full_name }}</td>
                     <td>{{ $customer->email }}</td>
                     <td>{{ $customer->phone }}</td>
-                    <td><a href="{{ route('customers.edit', $customer) }}" class="btn">Edit</a></td>
+                    <td>
+                        <div style="display:flex; gap:6px;">
+                            <a href="{{ route('customers.show', $customer) }}" class="btn btn-gray">View</a>
+                            <a href="{{ route('customers.edit', $customer) }}" class="btn">Edit</a>
+                            <form method="POST" action="{{ route('customers.destroy', $customer) }}"
+                                  onsubmit="return confirm('Delete this customer?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-pink">Delete</button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

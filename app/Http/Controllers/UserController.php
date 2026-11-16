@@ -34,6 +34,11 @@ class UserController extends Controller
             ->with('success', 'User created successfully.');
     }
 
+    public function show(User $user)
+    {
+        return view('users.show', compact('user'));
+    }
+
     public function edit(User $user)
     {
         return view('users.edit', compact('user'));
@@ -57,7 +62,6 @@ class UserController extends Controller
         if ($request->hasFile('avatar')) {
             $manager = new ImageManager(new Driver());
 
-            // display-ready 200x200 thumbnail
             $thumbnail = $manager->read($request->file('avatar'))
                 ->cover(200, 200)
                 ->toJpeg(85);
@@ -65,7 +69,6 @@ class UserController extends Controller
             $path = 'avatars/' . uniqid('avatar_') . '.jpg';
             Storage::disk('public')->put($path, (string) $thumbnail);
 
-            // delete old avatar, save only the new path
             if ($user->avatar) {
                 Storage::disk('public')->delete($user->avatar);
             }
@@ -77,5 +80,21 @@ class UserController extends Controller
 
         return redirect()->route('users.index')
             ->with('success', 'User updated successfully.');
+    }
+
+    public function destroy(User $user)
+    {
+        if (auth()->id() === $user->id) {
+            return back()->withErrors(['delete' => 'You cannot delete the account you are logged in with.']);
+        }
+
+        if ($user->avatar) {
+            Storage::disk('public')->delete($user->avatar);
+        }
+
+        $user->delete();
+
+        return redirect()->route('users.index')
+            ->with('success', 'User deleted successfully.');
     }
 }

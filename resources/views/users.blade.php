@@ -25,7 +25,18 @@
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->username }}</td>
                     <td>{{ $user->full_name }}</td>
-                    <td><a href="{{ route('users.edit', $user) }}" class="btn">Edit</a></td>
+                    <td>
+                        <div style="display:flex; gap:6px;">
+                            <a href="{{ route('users.show', $user) }}" class="btn btn-gray">View</a>
+                            <a href="{{ route('users.edit', $user) }}" class="btn">Edit</a>
+                            <form method="POST" action="{{ route('users.destroy', $user) }}"
+                                  onsubmit="return confirm('Delete this user?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-pink">Delete</button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
