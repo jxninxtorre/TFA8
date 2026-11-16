@@ -14,7 +14,7 @@ A point-of-sale (POS) and staff account management notebook built with **Laravel
 
 ---
 
-## 🛠️ Built With
+##  Built With
 
 * **Backend:** PHP, Laravel Framework
 * **Database:** MySQL (XAMPP / phpMyAdmin)
@@ -23,7 +23,7 @@ A point-of-sale (POS) and staff account management notebook built with **Laravel
 
 ---
 
-## 🚦 Application Routes
+## Application Routes
 
 | Method | URI | Description | Access |
 | :--- | :--- | :--- | :--- |
@@ -37,7 +37,7 @@ A point-of-sale (POS) and staff account management notebook built with **Laravel
 
 ---
 
-## ⚙️ Local Installation & Setup
+## Local Installation & Setup
 
 Kung na-clone mo ang repository na ito, sundin ang mga hakbang na ito para mapagana ito sa iyong local machine:
 
